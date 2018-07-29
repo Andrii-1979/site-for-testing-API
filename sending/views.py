@@ -16,7 +16,9 @@ def webhook(request):
         'is_active':1,
         'page':0
     }
-    r=requests.post(url, data = json.dumps(d))
+    r=requests.post(url, data = json.dumps(d), config={'trust_env': False})
+    s = requests.Session(config={'trust_env': False})
+    
     al=Sent.objects.create()
     al.json_out = str(d)
     al.uri = url
@@ -31,7 +33,9 @@ def token(request):
         'email':'riabozei19@gmail.com',
         'api_key':'bad6583e-9018-11e8-838e-d8cb8abf9305'
     }
-    r=requests.post(url, data = json.dumps(d))
+    r=requests.post(url, data = json.dumps(d), config={'trust_env': False})
+    s = requests.Session(config={'trust_env': False})
+    
     al=Sent.objects.create()
     al.json_out = str(d)
     al.uri = url
@@ -58,7 +62,8 @@ def read(request):
         'email':'riabozei19@gmail.com',
         'api_key':'bad6583e-9018-11e8-838e-d8cb8abf9305'
     }
-    r=requests.post(url, data = json.dumps(d))
+    r=requests.post(url, data = json.dumps(d), config={'trust_env': False})
+    s = requests.Session(config={'trust_env': False})
 #    al=Sent.objects.create()
 #    al.json_out = str(d)
 #    al.uri = url
@@ -79,7 +84,8 @@ def read(request):
     }
     
     headers = {'X-ALFACRM-TOKEN':token}
-    r=requests.post(url, data = json.dumps(d), headers = headers)
+    r=requests.post(url, data = json.dumps(d), headers = headers, config={'trust_env': False})
+    s = requests.Session(config={'trust_env': False})
     
     al=Sent.objects.create()
     al.json_out = str(d)
@@ -89,4 +95,5 @@ def read(request):
     al.save()
 
     return redirect(reverse('sending'))    
+
 
