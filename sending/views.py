@@ -6,6 +6,10 @@ from .models import Sent, Token
 
 token = '-'
 
+NO_PROXY = {
+    'no': 'pass',
+}
+
 def sending(request):
     sents = Sent.objects.all().order_by('pk')
     return render(request, 'sending/sending.html', {'sents':sents})
@@ -16,8 +20,8 @@ def webhook(request):
         'is_active':1,
         'page':0
     }
-    r=requests.post(url, data = json.dumps(d), config={'trust_env': False})
-    s = requests.Session(config={'trust_env': False})
+    r=requests.post(url, data = json.dumps(d), proxies=NO_PROXY)
+    #s = requests.Session(config={'trust_env': False})
     
     al=Sent.objects.create()
     al.json_out = str(d)
@@ -33,8 +37,8 @@ def token(request):
         'email':'riabozei19@gmail.com',
         'api_key':'bad6583e-9018-11e8-838e-d8cb8abf9305'
     }
-    r=requests.post(url, data = json.dumps(d), config={'trust_env': False})
-    s = requests.Session(config={'trust_env': False})
+    r=requests.post(url, data = json.dumps(d), proxies=NO_PROXY)
+    #s = requests.Session(config={'trust_env': False})
     
     al=Sent.objects.create()
     al.json_out = str(d)
@@ -62,8 +66,8 @@ def read(request):
         'email':'riabozei19@gmail.com',
         'api_key':'bad6583e-9018-11e8-838e-d8cb8abf9305'
     }
-    r=requests.post(url, data = json.dumps(d), config={'trust_env': False})
-    s = requests.Session(config={'trust_env': False})
+    r=requests.post(url, data = json.dumps(d), proxies=NO_PROXY)
+    #s = requests.Session(config={'trust_env': False})
 #    al=Sent.objects.create()
 #    al.json_out = str(d)
 #    al.uri = url
