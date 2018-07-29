@@ -1,0 +1,53 @@
+{% extends 'about/base.html' %}
+{% load static %}
+
+{% block name %} Прием web-hook-ов {% endblock %}
+
+{% block nav-receiving %} active {% endblock %}
+
+{% block content %}
+<div class="row">
+        <div class="col-sm-3 second fixed-right fixed-top">
+            <h3>Источники http-запросов на сайт:</h3>
+            <h4>- webhook с АльфаCRM</h4>
+            <h4>- запрос через YARC</h4>
+            <h4>- запрос с консольного приложения на python</h4>
+            <h4>. . .</h4>
+            
+            <h4>URI для отправки запроса = ссылка на страницу + alfa</h4>
+        </div>
+        <div class="col-sm-3 butt fixed-right fixed-top">
+            <a class="btn btn-primary" href="clear">Очистить таблицу</a> 
+        </div>
+        <div class="col-sm-3">  </div>
+        <div class="col-sm-9 third">
+            <table class="table table-bordered justify-content-end">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Scheme</th>
+                        <th scope="col">Method</th>
+                        <th scope="col">Host</th>
+                        <th scope="col">JSON</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for r in receives %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ r.date_in }}</td>
+                        <td>{{ r.method_in }}</td>
+                        <td>{{ r.host_in }}</td>
+                        <td>{{ r.json_in }}</td>
+                    </tr>   
+                    {% endfor %}                     
+                </tbody>
+            </table>                                       
+        </div>
+    </div>
+
+
+
+    
+{% endblock %}

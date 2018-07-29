@@ -1,0 +1,56 @@
+{% extends 'about/base.html' %}
+{% load static %}
+
+{% block name %} Запросы к API {% endblock %}
+ 
+{% block nav-sending %} active {% endblock %}
+
+{% block content %}
+<div class="row">
+        <div class="col-sm-3 second fixed-right fixed-top">
+            <h3>Отправить запрос на:</h3>
+            <a class="btn btn-primary" href="webhook">Web-hook Tester: проверка</a>   
+            <a class="btn btn-primary" href="token">АльфаCRM: получить token</a>
+            <a class="btn btn-primary" href="read">АльфаCRM: филиалы - читать</a>
+            <a class="btn btn-primary" href="#">АльфаCRM: филиал - создать</a>
+            <a class="btn btn-primary" href="#">АльфаCRM: филиал - обновить</a>
+            <a class="btn btn-primary" href="#">АльфаCRM: филиал - удалить</a>
+        </div>
+        <div class="col-sm-3 butt fixed-right fixed-top">
+            <a class="btn btn-primary" href="clear">Очистить таблицу</a> 
+        </div>
+        <div class="col-sm-3">  </div>
+        <div class="col-sm-9 third">
+            <table class="table table-bordered justify-content-end">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col"></th>
+                        <th colspan=2 scope="col">Параметры запроса</th>
+                        <th colspan=2 scope="col">Параметры ответа</th>
+                    </tr>
+                </thead>
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">URI</th>
+                        <th scope="col">JSON</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">JSON</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for r in sents %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ r.uri }}</td>
+                        <td>{{ r.json_out }}</td>
+                        <td>{{ r.status }}</td>
+                        <td>{{ r.json_in }}</td>
+                    </tr>        
+                    {% endfor %}                
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

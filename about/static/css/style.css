@@ -1,0 +1,48 @@
+a.btn {
+    margin-top:10px;
+    display:block;
+}
+
+ul {
+    margin-top:6px;
+}
+
+table {
+    margin-top:10px;
+}
+
+div.first {
+    background: white;
+    padding-top:10px;
+    left:20px;
+    right:20px;
+}
+
+first1 {
+    left:20px;
+} 
+
+h3, h4 {
+    text-align: center;
+    line-height:1.3;
+}
+
+h3 {
+    text-decoration-line: underline;
+}
+
+div.second, 
+div.third {
+    top:80px;
+}
+
+div.butt {
+    top:450px;
+}
+
+div.image {
+    position:relative;
+    top:140px;
+    text-align:center;
+    vertical-align:middle;
+}
