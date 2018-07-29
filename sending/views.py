@@ -3,6 +3,7 @@ import requests
 import json
 from django.shortcuts import redirect, reverse
 from .models import Sent, Token
+import urllib
 
 token = '-'
 
@@ -20,7 +21,7 @@ def webhook(request):
         'is_active':1,
         'page':0
     }
-    r=requests.post(url, data = json.dumps(d), proxies=NO_PROXY)
+    r=requests.post(url, data = json.dumps(d), proxies=urllib.getproxies())
     #s = requests.Session(config={'trust_env': False})
     
     al=Sent.objects.create()
@@ -37,7 +38,7 @@ def token(request):
         'email':'riabozei19@gmail.com',
         'api_key':'bad6583e-9018-11e8-838e-d8cb8abf9305'
     }
-    r=requests.post(url, data = json.dumps(d), proxies=NO_PROXY)
+    r=requests.post(url, data = json.dumps(d), proxies=urllib.getproxies())
     #s = requests.Session(config={'trust_env': False})
     
     al=Sent.objects.create()
@@ -66,7 +67,7 @@ def read(request):
         'email':'riabozei19@gmail.com',
         'api_key':'bad6583e-9018-11e8-838e-d8cb8abf9305'
     }
-    r=requests.post(url, data = json.dumps(d), proxies=NO_PROXY)
+    r=requests.post(url, data = json.dumps(d), proxies=urllib.getproxies())
     #s = requests.Session(config={'trust_env': False})
 #    al=Sent.objects.create()
 #    al.json_out = str(d)
@@ -88,8 +89,8 @@ def read(request):
     }
     
     headers = {'X-ALFACRM-TOKEN':token}
-    r=requests.post(url, data = json.dumps(d), headers = headers, config={'trust_env': False})
-    s = requests.Session(config={'trust_env': False})
+    r=requests.post(url, data = json.dumps(d), headers = headers, proxies=urllib.getproxies())
+    #s = requests.Session(config={'trust_env': False})
     
     al=Sent.objects.create()
     al.json_out = str(d)
