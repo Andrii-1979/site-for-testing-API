@@ -12,7 +12,7 @@ def sending(request):
 
 def webhook(request):
     url='https://webhook.site/3641365c-6e56-4e4d-80f6-0c4c1f42cc90'
-    url=request.META.get('HTTP_X_REAL_IP')
+    #url=request.META.get('HTTP_X_REAL_IP')
     d={
         'is_active':1,
         'page':0
@@ -34,7 +34,7 @@ def token(request):
         'email':'riabozei19@gmail.com',
         'api_key':'bad6583e-9018-11e8-838e-d8cb8abf9305'
     }
-    r=requests.post(url, data = json.dumps(d), proxies=urllib.getproxies())
+    r=requests.post(url, data = json.dumps(d))
     #s = requests.Session(config={'trust_env': False})
     
     al=Sent.objects.create()
@@ -63,7 +63,7 @@ def read(request):
         'email':'riabozei19@gmail.com',
         'api_key':'bad6583e-9018-11e8-838e-d8cb8abf9305'
     }
-    r=requests.post(url, data = json.dumps(d), proxies=urllib.getproxies())
+    r=requests.post(url, data = json.dumps(d))
     #s = requests.Session(config={'trust_env': False})
 #    al=Sent.objects.create()
 #    al.json_out = str(d)
@@ -85,7 +85,7 @@ def read(request):
     }
     
     headers = {'X-ALFACRM-TOKEN':token}
-    r=requests.post(url, data = json.dumps(d), headers = headers, proxies=urllib.getproxies())
+    r=requests.post(url, data = json.dumps(d), headers = headers)
     #s = requests.Session(config={'trust_env': False})
     
     al=Sent.objects.create()
