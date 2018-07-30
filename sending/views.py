@@ -2,14 +2,9 @@ from django.shortcuts import render
 import requests 
 import json
 from django.shortcuts import redirect, reverse
-from .models import Sent, Token
-import urllib
+from .models import Sent
 
 token = '-'
-
-NO_PROXY = {
-    'no': 'pass',
-}
 
 def sending(request):
     sents = Sent.objects.all().order_by('pk')
@@ -17,11 +12,12 @@ def sending(request):
 
 def webhook(request):
     url='https://webhook.site/3641365c-6e56-4e4d-80f6-0c4c1f42cc90'
+    url=request.META.get('HTTP_X_REAL_IP')
     d={
         'is_active':1,
         'page':0
     }
-    r=requests.post(url, data = json.dumps(d), proxies=urllib.getproxies())
+    r=requests.post(url, data = json.dumps(d), )
     #s = requests.Session(config={'trust_env': False})
     
     al=Sent.objects.create()
