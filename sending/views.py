@@ -17,7 +17,7 @@ def webhook(request):
         'is_active':1,
         'page':0
     }
-    r=requests.post(url, data = json.dumps(d), )
+    r=requests.post('http://'+url, data = json.dumps(d), )
     #s = requests.Session(config={'trust_env': False})
     
     al=Sent.objects.create()
